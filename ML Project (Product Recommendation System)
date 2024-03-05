@@ -115,3 +115,27 @@ df['price'] = df['price'].astype(str)
 df["features"] = df["name"]+df["description"]+df["price"]+df["terms"]+df["section"]
 
 print(df.head())
+
+# Feature Extraction
+
+cv = CountVectorizer(max_features=5000,stop_words="english")
+
+cv.fit_transform(df['features']).toarray().shape
+
+vectors = cv.fit_transform(df['features']).toarray()
+
+print(vectors[0])
+
+print(len(cv.get_feature_names_out()))
+
+# Apply cosine similarity
+
+print(cosine_similarity(vectors).shape)
+
+similarity = cosine_similarity(vectors)                        # so we dont have to write above full line of code
+
+print(similarity[0])
+
+print(similarity[0].shape)
+
+print(sorted(list(enumerate(similarity[0])), reverse=True, key=lambda x:x[1])[1:6])
