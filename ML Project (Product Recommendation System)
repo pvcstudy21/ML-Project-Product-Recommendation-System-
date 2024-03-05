@@ -1,0 +1,33 @@
+# Importing Liabraries
+
+# for data manipulation
+
+import numpy as np
+import pandas as pd
+
+
+# for data visualization 
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# for Fearure Extraction and Recommendation System
+
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+
+# miscellaneous
+
+import warnings
+warnings.filterwarnings("ignore")
+
+# Data Gathering
+
+df = pd.read_csv(r"C:\Users\Dell\Downloads\store_zara.csv")
+print(df.head())
+
+# drop unnecessary columns
+
+df.drop(["brand","url","currency","images","scraped_at","error","image_downloads"],axis=1,inplace=True)
+
+print(df)
