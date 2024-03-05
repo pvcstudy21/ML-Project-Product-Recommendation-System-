@@ -101,3 +101,17 @@ plt.tight_layout()
 plt.show()
 
 # The plot illustrates a notable level of demand for terms associated with both tops and shoes.
+
+
+# Feature Engineering
+
+# convert numerical values to string for count vectorization
+
+df['price'] = df['price'].astype(str)
+
+# creating new column considered for recomendation 
+# we are recomending "SKU" on the basis of ("name","description","price","terms","section")
+
+df["features"] = df["name"]+df["description"]+df["price"]+df["terms"]+df["section"]
+
+print(df.head())
