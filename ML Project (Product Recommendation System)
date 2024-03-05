@@ -31,3 +31,73 @@ print(df.head())
 df.drop(["brand","url","currency","images","scraped_at","error","image_downloads"],axis=1,inplace=True)
 
 print(df)
+
+# Exploratory Data Analysis
+
+# basic information
+
+print(df.shape)
+
+print(df.columns)
+
+print(df["terms"].unique())
+
+# overall data information
+
+print(df.info())
+
+# statistical information
+
+df.describe().T                                            # because only one numerical columns pressent
+
+# check for missing values
+
+print(df.isna().sum())
+
+df = df.dropna()
+
+print(df.isna().sum())
+
+# Data Visualization
+
+# Histogram of 'price'
+plt.figure(figsize=(5, 4))
+sns.histplot(df["price"], bins=20, kde=True,color='blue')
+plt.title("Distribution of Prices")
+plt.xlabel("Price")
+plt.ylabel("Frequency")
+plt.show()
+
+# The above histplot illustrates that over 1500 products are priced within the range of 0-200 USD.
+
+
+# Assuming 'section' column contains the section information
+section_distribution = df['section'].value_counts()
+
+# Plotting the distribution
+plt.figure(figsize=(5, 4))
+section_distribution.plot(kind='bar', color='blue')
+plt.title('Section Distribution Products')
+plt.xlabel('Section')
+plt.ylabel('Count')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.show()
+
+# This plot indicates that there are more products available in the women's section compared to the men's section.
+
+
+# Assuming 'section' column contains the section information
+term_distribution = df['terms'].value_counts()
+
+# Plotting the distribution
+plt.figure(figsize=(5, 4))
+term_distribution.plot(kind='bar', color='blue')
+plt.title('Terms Distribution Products')
+plt.xlabel('terms')
+plt.ylabel('Count')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.show()
+
+# The plot illustrates a notable level of demand for terms associated with both tops and shoes.
