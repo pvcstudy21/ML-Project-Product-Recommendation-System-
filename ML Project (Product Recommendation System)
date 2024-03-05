@@ -139,3 +139,40 @@ print(similarity[0])
 print(similarity[0].shape)
 
 print(sorted(list(enumerate(similarity[0])), reverse=True, key=lambda x:x[1])[1:6])
+
+# Function For Recommendation System
+
+def recommend(input1):
+    # Ensure input1 is converted to string
+    input_sku = str(input1)
+    try:
+        # Get index of input SKU
+        input_index = df[df['sku'] == input_sku].index[0]
+        # Retrieve similarity scores for the input SKU
+        distances = similarity[input_index]
+        # Sort indices based on similarity scores in descending order, excluding the input index
+        similar_indices = sorted(range(len(distances)), key=lambda i: distances[i], reverse=True)[1:4]
+        # Print recommended SKUs
+        print("Recommended Products:")
+        for i in similar_indices:
+            print(df.iloc[i]['sku'],df.iloc[i])
+    except IndexError:
+        print("SKU not found!")
+
+print(df)
+
+recommend("272145190-250-2")
+
+recommend("311292672-800-2")
+
+recommend("324052738-800-46")
+
+def recommend_quick(input1):
+    df_index = df[df['sku']==input1].index[0]
+    distances = similarity[df_index]
+    output_list = sorted(list(enumerate(distances)),reverse=True,key=lambda x:x[1])[1:6]
+    
+    for i in output_list:
+        print(df.iloc[i[0]].sku)
+
+recommend_quick("272145190-250-2")     
